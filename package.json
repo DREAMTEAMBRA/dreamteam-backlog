@@ -1,0 +1,14 @@
+{
+  "name": "dreamteam-backlog",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Linear-lite visual backlog for multi-project management on top of GitHub Issues",
+  "scripts": {
+    "dev": "netlify dev",
+    "start": "netlify dev",
+    "lint": "echo 'no lint configured yet'"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.38.1"
+  }
+}

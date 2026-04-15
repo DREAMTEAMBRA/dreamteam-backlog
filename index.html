@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DreamTeam Backlog • Linear-lite</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>DreamTeam Backlog</h1>
+      <p>Kanban visual multi-projeto (GitHub Issues como fonte de verdade)</p>
+    </div>
+    <div class="topbar-actions">
+      <select id="projectFilter">
+        <option value="all">Todos os projetos</option>
+        <option value="auditoria">Auditoria</option>
+        <option value="ia">IA</option>
+        <option value="crowdfunding">Crowdfunding</option>
+        <option value="engenharia">Engenharia Civil</option>
+      </select>
+      <button id="refreshBtn">Atualizar</button>
+      <button id="newIssueBtn" class="primary">+ Nova tarefa</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="focus-strip">
+      <div>
+        <h3>🎯 Top 3 de hoje</h3>
+        <ul id="top3"></ul>
+      </div>
+      <div>
+        <h3>⛔ Bloqueadas</h3>
+        <ul id="blockedList"></ul>
+      </div>
+      <div>
+        <h3>📊 Resumo</h3>
+        <ul id="summary"></ul>
+      </div>
+    </section>
+
+    <section class="board" id="board">
+      <div class="column" data-status="status:backlog"><h2>Backlog</h2><div class="cards"></div></div>
+      <div class="column" data-status="status:todo"><h2>Todo</h2><div class="cards"></div></div>
+      <div class="column" data-status="status:doing"><h2>Doing</h2><div class="cards"></div></div>
+      <div class="column" data-status="status:review"><h2>Review</h2><div class="cards"></div></div>
+      <div class="column" data-status="status:blocked"><h2>Blocked</h2><div class="cards"></div></div>
+      <div class="column" data-status="status:done"><h2>Done</h2><div class="cards"></div></div>
+    </section>
+  </main>
+
+  <dialog id="issueDialog">
+    <form id="issueForm">
+      <h3>Nova tarefa</h3>
+      <label>Título<input name="title" required maxlength="120" /></label>
+      <label>Projeto
+        <select name="project" required>
+          <option value="auditoria">Auditoria</option>
+          <option value="ia">IA</option>
+          <option value="crowdfunding">Crowdfunding</option>
+          <option value="engenharia">Engenharia Civil</option>
+        </select>
+      </label>
+      <label>Prioridade
+        <select name="priority">
+          <option value="priority:p1">P1</option>
+          <option value="priority:p2" selected>P2</option>
+          <option value="priority:p3">P3</option>
+        </select>
+      </label>
+      <label>Status inicial
+        <select name="status">
+          <option value="status:backlog" selected>Backlog</option>
+          <option value="status:todo">Todo</option>
+          <option value="status:doing">Doing</option>
+          <option value="status:review">Review</option>
+          <option value="status:blocked">Blocked</option>
+          <option value="status:done">Done</option>
+        </select>
+      </label>
+      <label>Descrição
+        <textarea name="body" rows="5" placeholder="Contexto, critérios de pronto, próximos passos..."></textarea>
+      </label>
+      <menu>
+        <button value="cancel" type="button" id="cancelDialog">Cancelar</button>
+        <button class="primary" type="submit">Criar tarefa</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <template id="cardTemplate">
+    <article class="card" draggable="true">
+      <header>
+        <span class="issue-number"></span>
+        <span class="priority"></span>
+      </header>
+      <h4></h4>
+      <p class="project-pill"></p>
+      <footer>
+        <a target="_blank" rel="noopener">Abrir no GitHub</a>
+      </footer>
+    </article>
+  </template>
+
+  <script src="./app.js"></script>
+</body>
+</html>
